@@ -9,15 +9,7 @@ import axios from 'axios'
 
 function App() {
   const [users, setUsers] = useState([])
-  axios
-.get('https://reqres.in/api/users')
-.then(res => {
-  console.log(res)
-  setUsers(res.data.data.first_name)
-})
-.catch((err) => {
-  console.log(err)
-})
+  
 
   
   const intialValue = {
@@ -63,8 +55,17 @@ function App() {
   };
 
   const postNewMember = (info) => {
-    setNewMember([...newMember, info])
-    setValue(intialValue)
+    axios
+    .post('https://reqres.in/api/users', newMember)
+    .then(res => {
+      setNewMember([...newMember, info])
+      setValue(intialValue)
+      console.log(res)
+    })
+    .catch((err) => {
+    console.log(err)
+    })
+    
 
   }
   return (
